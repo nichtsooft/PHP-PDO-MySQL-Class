@@ -11,20 +11,24 @@ class PDOIterator implements Iterator {
         $this->fetchMode = $fetchMode;
     }
 
+    #[\ReturnTypeWillChange]
     function rewind() {
         $this->position = 0;
         $this->pdo->execute();
         $this->nextResult = $this->pdo->fetch($this->fetchMode, PDO::FETCH_ORI_NEXT);
     }
 
+    #[\ReturnTypeWillChange]
     function current() {
         return $this->nextResult;
     }
 
+    #[\ReturnTypeWillChange]
     function key() {
         return $this->position;
     }
 
+    #[\ReturnTypeWillChange]
     function next() {
         ++$this->position;
         $this->nextResult = $this->pdo->fetch($this->fetchMode, PDO::FETCH_ORI_NEXT);
